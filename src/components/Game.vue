@@ -53,7 +53,7 @@ function onKey (key: string) {
     fillTile(key.toLowerCase())
   } else if (key === 'Backspace') {
     clearTile()
-  } else if (key === 'Enter') {
+  } else if (key === 'Entrer') {
     completeRow()
   }
 }
