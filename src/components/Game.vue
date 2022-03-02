@@ -53,7 +53,7 @@ function onKey (key: string) {
     fillTile(key.toLowerCase())
   } else if (key === 'Backspace') {
     clearTile()
-  } else if (key === 'Entrer') {
+  } else if (key === 'Entrer' || key === 'Enter') {
     completeRow()
   }
 }
@@ -118,24 +118,25 @@ function completeRow () {
 
     allowInput = false
     if (currentRow.every((tile) => tile.state === LetterState.CORRECT)) {
-      // yay!
+		// ANCHOR Partie gagnée
+
       setTimeout(() => {
         grid = genResultGrid()
         showMessage(
-          ['Giga boss', 'Magnifique', 'Impressionnant', 'Beaugosse', 'Bien', 'Juste wow'][
+          ['Bravo le giga boss', 'Magnifique !', 'Impressionnant !', 'Bien joué !', 'Éblouissant'][
             currentRowIndex
           ],
           -1
         )
         emit('gameComplete', { success: true, successGrid: grid })
         success = true
-      }, 1600)
+      }, 320 * answer.length )
     } else if (currentRowIndex < board.length - 1) {
       // go the next row
       currentRowIndex++
       setTimeout(() => {
         allowInput = true
-      }, 1600)
+      }, 320 * answer.length )
     } else {
       // game over :(
       setTimeout(() => {
@@ -199,7 +200,7 @@ function genResultGrid () {
           {{ message }}
         </div>
         <div v-if="success">
-          On attend les nullos...
+          On attend les nuls...
         </div>
       </div>
       <div class="board-left">
@@ -241,6 +242,7 @@ function genResultGrid () {
 </template>
 
 <style scoped>
+
 #board-wrapper {
   --border-radius: 4px;
 
@@ -251,17 +253,17 @@ function genResultGrid () {
   align-items: center;
   margin: 0 auto;
   flex-grow: 12;
-  --height: min(420px, calc(var(--vh, 100vh) - 380px)); /* was 310 */
   overflow: hidden;
 }
 
 #board {
   display: grid;
   grid-template-rows: repeat(6, 1fr);
-  grid-gap: 5px;
+  grid-gap: 10px;
   box-sizing: border-box;
   height: var(--height);
   position: relative;
+  padding-top: 20px;
 }
 
 .board-left, .board-right {
@@ -281,7 +283,7 @@ function genResultGrid () {
 #keyboard-wrapper {
   width: 100%;
   max-width: 500px;
-  margin: 0 auto;
+  margin: 25px auto;
 }
 
 .board-message {
@@ -349,8 +351,9 @@ function genResultGrid () {
 .tile {
   width: 100%;
   min-width: 60px;
+  min-height: 60px;
   margin: 0 5px;
-  font-size: 2rem;
+  font-size: 22px;
   line-height: 2rem;
   font-weight: bold;
   vertical-align: middle;
@@ -472,12 +475,6 @@ function genResultGrid () {
   }
   100% {
     transform: translateY(0px);
-  }
-}
-
-@media (max-height: 680px) {
-  .tile {
-    font-size: 3vh;
   }
 }
 

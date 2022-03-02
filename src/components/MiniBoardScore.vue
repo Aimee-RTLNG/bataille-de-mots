@@ -13,7 +13,9 @@ const { user, number, showLetters = false } = defineProps<{
   <MiniBoard :large="true" :user="user" :showLetters="showLetters">
      <div class="mini-board-name mini-board-final-score">
       <div>
-        {{ position }}. {{ user.name }}
+	  	<span v-if="position == 1">👑</span>
+		<span v-else>{{ position }}</span>
+         - {{ user.name }}
       </div>
     </div>
   </MiniBoard>
@@ -21,13 +23,7 @@ const { user, number, showLetters = false } = defineProps<{
 
 <style scoped>
 .mini-board-final-score {
-  text-align: left;
-}
-
-.mini-board-final-score .mini-board-tile {
-  position: relative;
-  min-width: 35px;
-  margin: 2px;
+  text-align: center;
 }
 
 .mini-board-name {

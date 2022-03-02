@@ -2,14 +2,15 @@
 import MiniBoard from './MiniBoard.vue'
 import { OtherUser } from '../types'
 
-const { user, showLetters = false } = defineProps<{
+const { user, showLetters = false, answerLength } = defineProps<{
   user: OtherUser,
-  showLetters: boolean
+  showLetters: boolean,
+  answerLength: number,
 }>()
 </script>
 
 <template>
-  <MiniBoard :user="user" :showLetters="showLetters">
+  <MiniBoard :user="user" :showLetters="showLetters" :answerLength="answerLength">
      <div class="mini-board-name">
       <div>
         {{ user.name }}

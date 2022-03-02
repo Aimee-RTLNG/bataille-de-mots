@@ -293,12 +293,12 @@ function createEmojiScore (successGrid: string) {
         <Game :answer="answer" @lettersGuessed="onLettersGuessed" @gameComplete="onGameComplete">
           <template v-slot:board-left>
             <div class="mini-board-container">
-              <MiniBoardPlaying v-for="other in othersFilterOdd(true)" :user="other" :showLetters="gameState === GameState.COMPLETE" />
+              <MiniBoardPlaying v-for="other in othersFilterOdd(true)" :user="other" :showLetters="gameState === GameState.COMPLETE" :answerLength="answer.length" />
             </div>
           </template>
           <template v-slot:board-right>
             <div class="mini-board-container">
-              <MiniBoardPlaying v-for="other in othersFilterOdd(false)" :user="other" :showLetters="gameState === GameState.COMPLETE" />
+              <MiniBoardPlaying v-for="other in othersFilterOdd(false)" :user="other" :showLetters="gameState === GameState.COMPLETE" :answerLength="answer.length" />
             </div>
           </template>
         </Game>
@@ -308,16 +308,25 @@ function createEmojiScore (successGrid: string) {
         <div v-if="gameState === GameState.SCORES" id="scores">
           <div>
             <h2>
-              <span>Scores poeur le mot : <strong class="tracking-wider">{{ answer.toUpperCase() }}</strong></span>
+              <span>
+			  	Tableau des scores pour le mot : 
+			  	<br>
+			  	<strong class="tracking-wider">{{ answer.toUpperCase() }}</strong>
+			  </span>
             </h2>
+
             <div class="divider" />
+
             <div class="scores-grid">
               <MiniBoardScore v-for="(other, index) in sortUsers(savedScores().toArray())" :user="other" :position="index + 1" :showLetters="true" />
             </div>
+
+            <div class="divider" />
+
             <a href="/">
-            <button class="ready-button">
-              Rejouer
-            </button>
+				<button class="ready-button">
+				Rejouer
+				</button>
             </a>
             
           </div>
@@ -435,6 +444,7 @@ h2 {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	padding-top: 20px;
 	justify-content: center;
 	flex-grow: 1
 }
@@ -533,8 +543,7 @@ h2 {
 
 .scores-grid {
 	width: 100%;
-	display: grid;
-	margin: 28px 0 10px;
+	margin: 30px 0;
 	grid-template-columns: repeat(2, 1fr);
 	grid-auto-rows: auto;
 	grid-gap: 40px

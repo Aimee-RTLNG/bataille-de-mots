@@ -9,8 +9,6 @@ body,
 	top: 0;
 	left: 0;
 	right: 0;
-	height: var(--vh);
-	height: -webkit-fill-available;
 }
 
 *,
@@ -27,14 +25,11 @@ body,
 	padding-bottom: 2px;
 }
 
-#app {
-	background: #18181B;
-	color: #D4D4D8;
-}
-
 body {
 	font-family: Inter, 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
 	margin: 0 auto;
+	background: #18181B;
+	color: #D4D4D8;
 }
 
 input,

@@ -19,14 +19,17 @@ const { answerLength, sortedUsers, shrink = false } = defineProps<{
       <div class="mini-score-name">{{ user.name }}</div>
       <ScoreCard :answerLength="answerLength" :user="user" />
     </div>
+
     <div :class="['mini-score-mobile', shrink && 'shrink']">
-      <span v-if="sortedUsers[0].score.correct === answerLength">
-        <span class="mini-score-name">{{ sortedUsers[0].name }}</span> a terminé !
-      </span>
-      <span v-else>
-        <span class="mini-score-name">{{ sortedUsers[0].name }}</span> est en tête avec 
-      </span>
-      <ScoreCard :answerLength="answerLength" :user="sortedUsers[0]" />
+		<div class="flex" v-if="sortedUsers[0].score.correct === answerLength">
+			<span class="mini-score-name mr-2">{{ sortedUsers[0].name }}</span> a terminé !
+			<ScoreCard class="ml-2" :answerLength="answerLength" :user="sortedUsers[0]" />
+		</div>
+		<div class="flex" v-else-if="sortedUsers[0].score.correct" >
+			<span class="mini-score-name mr-2">{{ sortedUsers[0].name }}</span> est en tête avec 
+			<ScoreCard class="ml-2" :answerLength="answerLength" :user="sortedUsers[0]" />
+		</div>
+		<div v-else>Essayez de deviner le mot de {{answerLength}} lettres</div>
     </div>
   </div>
 </template>
@@ -57,7 +60,7 @@ const { answerLength, sortedUsers, shrink = false } = defineProps<{
   justify-content: center;
   align-items: center;
   gap: 5px;
-  margin-bottom: -20px
+  margin-bottom: 25px;
 }
 
 .mini-score-score {
