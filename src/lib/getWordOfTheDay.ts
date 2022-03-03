@@ -24,6 +24,16 @@ export function getWordOfTheDay () {
   return { answer: selectedWord.toLowerCase(), answerDay: day + 1 }
 }
 
+export function getWordById (roomId : string) {
+	var indexCode = parseInt(roomId.replace(/[^\d,]/g,'')) % answers.length;
+
+	let selectedWord = answers[indexCode];
+	if (import.meta.env.DEV) {
+	  console.log('DEV: Answer is ' + selectedWord);
+	}
+	return selectedWord.toLowerCase()
+}
+
 function dateToUtc (d: Date) {
   return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()))
 }
