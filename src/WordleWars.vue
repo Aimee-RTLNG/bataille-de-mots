@@ -530,8 +530,8 @@ h2 {
 	display: grid;
 	grid-template-rows: repeat(2, calc(var(--height)/ 2));
 	grid-auto-columns: auto;
-	grid-auto-flow: column;
-	gap: 0 40px
+	grid-auto-flow: dense;
+	gap: 20px 20px
 }
 
 #intro form,
