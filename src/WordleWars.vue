@@ -526,12 +526,11 @@ h2 {
 }
 
 .mini-board-container {
-	margin: 0 40px;
-	display: grid;
-	grid-template-rows: repeat(2, calc(var(--height)/ 2));
-	grid-auto-columns: auto;
-	grid-auto-flow: dense;
-	gap: 20px 20px
+	margin: 0 20px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
 }
 
 #intro form,

@@ -270,6 +270,7 @@ function genResultGrid () {
   position: absolute;
   top: 0;
   bottom: 0;
+  width: 100%;
 }
 
 .board-left {
@@ -308,31 +309,6 @@ function genResultGrid () {
   width: 100%;
   max-width: 80%;
 }
-
-/*
-.board-message.board-message-success {
-  white-space: normal;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 4px;
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.80);
-  padding: 16px 20px;
-  z-index: 2;
-  border-radius: var(--border-radius);
-  transition: opacity 0.3s ease-out;
-  font-size: 18px;
-  text-align: center;
-  transform: none;
-}
- */
 
 .board-message-success .board-message-main {
   font-size: 21px;
