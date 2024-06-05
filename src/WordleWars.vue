@@ -301,7 +301,7 @@ function toggleAudio(state : boolean){
       
       <div v-if="gameState === GameState.CONNECTING" id="connecting">
         <div class="flex flex-col items-center justify-center text-2xl">
-          <i class="gg-spinner-two" width="20"></i>
+          <i class="gg-spinner-two mt-5" width="20"></i>
           <p class="mt-5">CONNEXION</p>
         </div>
       </div>
@@ -330,7 +330,9 @@ function toggleAudio(state : boolean){
 
       <div v-if="gameState === GameState.WAITING || gameState === GameState.READY" id="waiting">
         <div>
-          <h2>En attente d'autres joueurs</h2>
+          <h2>En attente des autres joueurs</h2>
+		  <small>La partie se lance quand tout le monde est prêt !</small>
+		  <br>
           <div class="waiting-list">
             <div class="waiting-player">
               <span class="mr-5">{{ myPresence.name }} (moi)</span>
@@ -361,16 +363,10 @@ function toggleAudio(state : boolean){
       </div>
 
       <div v-if="gameState === GameState.PLAYING || gameState === GameState.COMPLETE" id="playing">
-        <MiniScores :answerLength="answer.length" :sortedUsers="sortedUsers" :shrink="true" />
         <Game :answer="answer" @lettersGuessed="onLettersGuessed" @gameComplete="onGameComplete">
-          <template v-slot:board-left>
+          <template v-slot:board-others>
             <div class="mini-board-container">
-              <MiniBoardPlaying v-for="other in othersFilterOdd(true)" :user="other" :showLetters="gameState === GameState.COMPLETE" :answerLength="answer.length" />
-            </div>
-          </template>
-          <template v-slot:board-right>
-            <div class="mini-board-container">
-              <MiniBoardPlaying v-for="other in othersFilterOdd(false)" :user="other" :showLetters="gameState === GameState.COMPLETE" :answerLength="answer.length" />
+              <MiniBoardPlaying v-for="other in othersPresence" :user="other" :showLetters="gameState === GameState.COMPLETE" :answerLength="answer.length" />
             </div>
           </template>
         </Game>
@@ -395,12 +391,10 @@ function toggleAudio(state : boolean){
 
             <div class="divider" />
 
-            <a href="/">
-				<button class="ready-button">
+			<button class="ready-button">
 				Rejouer
-				</button>
-            </a>
-            
+			</button>
+		
           </div>
         </div>
       </Transition>
@@ -536,7 +530,7 @@ h2 {
 #intro form,
 .waiting-list {
 	width: 100%;
-	margin: 0 auto
+	margin: 0 auto;
 }
 
 #intro form>* {
@@ -565,7 +559,7 @@ h2 {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 12px
+	margin-bottom: 12px;
 }
 
 .waiting-player-ready,
